@@ -1,22 +1,35 @@
-require 'doc/file_troll'
-require 'doc/parser'
-require 'doc/writer'
+require 'docface/file_troll'
+require 'docface/parser'
+require 'docface/writer'
 require 'erb'
+require 'docface/cli'
 require 'pp'
 
-module Doc
+module DocFace
   class Base
 
     def initialize
+      cli
       @troll = FileTroll.new
       @writer = Writer.new
-      @directory = "/Users/a304092/git/chef"
       @files = @troll.troll(@directory)
       parse
-      cleanup(@index_hash)
-      pp @index_hash
+      sub_index
+      # cleanup(@index_hash)
       assets
       write_index(build_index("templates/index.erb"))
+    end
+
+    def cli
+      @cli = Cli.opts
+      @directory = @cli[:dir]
+      @output_dir = @cli[:output] ? @cli[:output] : "#{Dir.pwd}/docface"
+    end
+
+    def sub_index
+      @index.each do |i|
+        i.gsub!(/\.md/,".html")
+      end
     end
 
     def parse
@@ -29,17 +42,18 @@ module Doc
         short_files << file
         build(file,content)
       end
-      @index_hash = @troll.index_hash(short_files)
+      #@index_hash = @troll.index_hash(short_files)
+      @index = short_files
     end
 
     def build(file,content)
-      file = File.join(File.dirname(__FILE__),"../../build",file).gsub(/\.md/,".html")
+      file = File.join(@output_dir,file).gsub(/\.md/,".html")
       directory = File.dirname(file)
       @writer.write(directory,file,content)
     end
 
     def assets
-      @writer.assets(File.join(File.dirname(__FILE__),"../../public"),File.join(File.dirname(__FILE__),"../../build/public"))
+      @writer.assets(File.join(File.dirname(__FILE__),"../../public"),"#{@output_dir}/public")
     end
 
     def build_index(path)
@@ -48,7 +62,7 @@ module Doc
     end
 
     def write_index(content)
-      @writer.write(File.join(File.dirname(__FILE__),"../../build/"),File.join(File.dirname(__FILE__),"../../build/index.html"),content)
+      @writer.write(@output_dir,"#{@output_dir}/index.html",content)
     end
 
     def cleanup(h)
@@ -57,15 +71,19 @@ module Doc
       false
     end
 
-    def i_hash(h)
+    def i_hash(h,d=[],s=[])
       h.each do |k,v|
-        if v.is_a?(Hash)
-          puts k
-          i_hash(v)
+        if v == nil #at the last node
+          s.push k
+          d << s.join("/")
+          s.pop
         else
-          puts "=============="
+          s.push k
+          i_hash(v,d,s)
+          s.pop
         end
       end
+      d.sort
     end
 
   end

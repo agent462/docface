@@ -1,6 +1,6 @@
 require 'fileutils'
 
-module Doc
+module DocFace
   class Writer
 
     def write(directory,file,content)
