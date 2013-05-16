@@ -2,8 +2,7 @@
 $str = ""
 $i = 0
 
-def CreateNav(h,path=nil)
-  path = "" if path==nil
+def CreateNav(h,path="")
   return if h == nil
   h.each do |k,v|
     if k.end_with?("md")
