@@ -1,3 +1,38 @@
+<% 
+$str = ""
+$i = 0
+
+def CreateNav(h,path=nil)
+  path = "" if path==nil
+  return if h == nil
+  h.each do |k,v|
+    if k.end_with?("md")
+      tmp=k.gsub(/md/, 'html')
+      $str += "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{tmp}\">#{k}</a></li></ul>"
+      $i += 1
+    else
+      $i += 1
+      ## Accordion Header
+      $str += "<div class='accordion-group'>
+                <div class='accordion-heading'>
+                  <a class='accordion-toggle' data-toggle='collapse' href='#collapse#{$i}'>
+                    #{k}
+                  </a>
+                </div>
+                <div id='collapse#{$i}' class='accordion-body collapse'>
+                    <div class='accordion-inner'>
+               
+              "
+
+      CreateNav(v, "#{path}/#{k}") if v != nil && v.is_a?(Hash)
+
+      ## End Accordion Header
+      $str += "</div></div></div>"
+    end
+  end
+end
+%>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
@@ -22,11 +57,26 @@
   <div class="row-fluid">
     <div class="span3">
       <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-        <%  @index.each do |i| %>
-              <li><a href="#" res="<%= i %>"><%= i %></a></li>
-        <%  end %>
-        </ul>
+        <div class='accordion'>
+          <% @index_hash.each do |k,v| %>
+            <div class='accordion-group'>
+              <div class='accordion-heading'>
+                <a class='accordion-toggle' data-toggle='collapse' href='#collapse<%=$i%>'>
+                  <%= k%>
+                </a>
+              </div>
+              <div id='collapse<%=$i%>' class='accordion-body collapse'>
+                    <div class='accordion-inner'>
+                      <% $i += 1 
+                         $str = "" 
+                         CreateNav(v,k) 
+                      %>
+                      <%= $str%>
+                    </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div><!--/.well -->
     </div><!--/span-->
 
