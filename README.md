@@ -4,6 +4,7 @@ DocFace turns your markdown files into html and makes them easy to view via a we
 
 I mainly created DocFace because I use Opscode Chef and you end up with tons of README and CHANGELOG files.  I wanted to view these is some sane way.
 
+<img src="https://raw.github.com/agent462/docface/downloads/screenshot.png" title="docface screenshot" />
 Installation
 -----------------------
 ~~~~
@@ -25,7 +26,7 @@ docface -d ~/git/chef -o ~/my_docs
 License and Author
 ==================
 
-Author:: Bryan Brandau <agent462@gmail.com>
+Author:: Bryan Brandau <agent462@gmail.com>   
 Author:: Andrew Painter <anpainte@gmail.com>
 
 Copyright:: 2013, Bryan Brandau
