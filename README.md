@@ -19,13 +19,14 @@ Usage
 -----------------------
 ~~~~
 docface -d ~/git/chef
-docface -d ~/git/chef, ~/git/troubleshooting
+docface -d ~/git/chef -o ~/my_docs
 ~~~~
 
 License and Author
 ==================
 
 Author:: Bryan Brandau <agent462@gmail.com>
+Author:: Andrew Painter <anpainte@gmail.com>
 
 Copyright:: 2013, Bryan Brandau
 

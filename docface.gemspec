@@ -4,7 +4,6 @@ Gem::Specification.new do |s|
   s.name        = 'docface'
   s.version     = DocFace::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.date        = '2013-05-01'
   s.summary     = "A markdown documentation generator/viewer."
   s.description = "View your markdown files as a structured website."
   s.authors     = ["Bryan Brandau"]

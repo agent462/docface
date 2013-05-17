@@ -3,7 +3,6 @@ require 'docface/parser'
 require 'docface/writer'
 require 'erb'
 require 'docface/cli'
-require 'pp'
 
 module DocFace
   class Base
@@ -14,8 +13,7 @@ module DocFace
       @writer = Writer.new
       @files = @troll.troll(@directory)
       parse
-      sub_index
-      # cleanup(@index_hash)
+      cleanup(@index_hash)
       assets
       write_index(build_index("templates/index.erb"))
     end
@@ -24,12 +22,6 @@ module DocFace
       @cli = Cli.opts
       @directory = @cli[:dir]
       @output_dir = @cli[:output] ? @cli[:output] : "#{Dir.pwd}/docface"
-    end
-
-    def sub_index
-      @index.each do |i|
-        i.gsub!(/\.md/,".html")
-      end
     end
 
     def parse
@@ -42,8 +34,7 @@ module DocFace
         short_files << file
         build(file,content)
       end
-      #@index_hash = @troll.index_hash(short_files)
-      @index = short_files
+      @index_hash = @troll.index_hash(short_files)
     end
 
     def build(file,content)
@@ -69,21 +60,6 @@ module DocFace
       return true if h.empty?
       h.find_all{|k,v|h[k]=nil if v.is_a?(Hash)&&cleanup(v)}
       false
-    end
-
-    def i_hash(h,d=[],s=[])
-      h.each do |k,v|
-        if v == nil #at the last node
-          s.push k
-          d << s.join("/")
-          s.pop
-        else
-          s.push k
-          i_hash(v,d,s)
-          s.pop
-        end
-      end
-      d.sort
     end
 
   end

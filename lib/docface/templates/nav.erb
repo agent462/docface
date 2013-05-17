@@ -1,4 +1,4 @@
-<% 
+<%
 $str = ""
 $i = 0
 
@@ -6,8 +6,8 @@ def CreateNav(h,path="")
   return if h == nil
   h.each do |k,v|
     if k.end_with?("md")
-      tmp=k.gsub(/md/, 'html')
-      $str += "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{tmp}\">#{k}</a></li></ul>"
+      html_path=k.gsub(/md/, 'html')
+      $str += "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{html_path}\">#{k}</a></li></ul>"
       $i += 1
     else
       $i += 1
@@ -20,7 +20,6 @@ def CreateNav(h,path="")
                 </div>
                 <div id='collapse#{$i}' class='accordion-body collapse'>
                     <div class='accordion-inner'>
-               
               "
 
       CreateNav(v, "#{path}/#{k}") if v != nil && v.is_a?(Hash)
@@ -45,8 +44,8 @@ end
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
         </ul>
-    <input type="text" data-provide="typeahead" style="color:#888;float:right;margin-top:8px;"
-    value="item" onfocus="inputFocus(this)" onblur="inputBlur(this)" data-source='[]'>
+   <!--  <input type="text" data-provide="typeahead" style="color:#888;float:right;margin-top:8px;"
+    value="item" onfocus="inputFocus(this)" onblur="inputBlur(this)" data-source='[]'> -->
 
       </div><!--/.nav-collapse -->
     </div>
@@ -66,9 +65,9 @@ end
               </div>
               <div id='collapse<%=$i%>' class='accordion-body collapse'>
                     <div class='accordion-inner'>
-                      <% $i += 1 
-                         $str = "" 
-                         CreateNav(v,k) 
+                      <% $i += 1
+                         $str = ""
+                         CreateNav(v,k)
                       %>
                       <%= $str%>
                     </div>
