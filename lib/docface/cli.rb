@@ -11,7 +11,7 @@ module DocFace
     end
 
     def self.opts
-      opts = Trollop::options do
+      p = Trollop::Parser.new do
         version "DocFace version: #{DocFace::VERSION} (c) 2013 Bryan Brandau"
         banner <<-EOS.gsub(/^ {10}/, '')
           #
@@ -34,6 +34,11 @@ module DocFace
         opt :output, "The directory to write the generated output to", :short => "o", :type => :string
         opt :title, "The title of the page", :short => "t", :type => :string
         opt :description, "A custom description for the page", :short => "D", :type => :string
+      end
+
+      opts = Trollop::with_standard_exception_handling p do
+        raise Trollop::HelpNeeded if ARGV.empty? # show help screen
+        p.parse ARGV
       end
     end
 
