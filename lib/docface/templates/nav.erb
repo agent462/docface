@@ -1,31 +1,30 @@
 <%
-$str = ""
-$i = 0
+@str = ""
+@i = 0
 
 def create_nav(h,path="")
   return if h == nil
   h.each do |k,v|
+    @i += 1
     if k.end_with?("md")
-      html_path=k.gsub(/md/, 'html')
-      $str << "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{html_path}\">#{k}</a></li></ul>"
-      $i += 1
+      html_path = k.gsub(/md/, 'html')
+      @str << "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{html_path}\">#{k}</a></li></ul>"
     else
-      $i += 1
       ## Accordion Header
-      $str << "<div class='accordion-group'>
+      @str << "<div class='accordion-group'>
                 <div class='accordion-heading'>
-                  <a class='accordion-toggle' data-toggle='collapse' href='#collapse#{$i}'>
+                  <a class='accordion-toggle' data-toggle='collapse' href='#collapse#{@i}'>
                     #{k}
                   </a>
                 </div>
-                <div id='collapse#{$i}' class='accordion-body collapse'>
+                <div id='collapse#{@i}' class='accordion-body collapse'>
                     <div class='accordion-inner'>
               "
 
       create_nav(v, "#{path}/#{k}") if v != nil && v.is_a?(Hash)
 
       ## End Accordion Header
-      $str << "</div></div></div>"
+      @str << "</div></div></div>"
     end
   end
 end
@@ -44,9 +43,6 @@ end
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
         </ul>
-   <!--  <input type="text" data-provide="typeahead" style="color:#888;float:right;margin-top:8px;"
-    value="item" onfocus="inputFocus(this)" onblur="inputBlur(this)" data-source='[]'> -->
-
       </div><!--/.nav-collapse -->
     </div>
   </div>
@@ -59,22 +55,21 @@ end
           <% @index_hash.each do |k,v| %>
             <div class='accordion-group'>
               <div class='accordion-heading'>
-                <a class='accordion-toggle' data-toggle='collapse' href='#collapse<%=$i%>'>
-                  <%= k%>
+                <a class='accordion-toggle' data-toggle='collapse' href='#collapse<%= @i %>'>
+                  <%= k %>
                 </a>
               </div>
-              <div id='collapse<%=$i%>' class='accordion-body collapse'>
-                    <div class='accordion-inner'>
-                      <% $i += 1
-                         $tr = ""
-                         create_nav(v,k)
-                      %>
-                      <%= $str%>
-                    </div>
+              <div id='collapse<%= @i %>' class='accordion-body collapse'>
+                <div class='accordion-inner'>
+                  <% @i += 1
+                     @str = ""
+                     create_nav(v,k)
+                  %>
+                  <%= @str %>
+                </div>
               </div>
             </div>
           <% end %>
         </div>
       </div><!--/.well -->
     </div><!--/span-->
-

@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 require 'trollop'
 require 'rainbow'
 require 'docface/version'
@@ -28,7 +27,7 @@ module DocFace
         EOS
         banner <<-EOS.gsub(/^ {10}/, '').color(:cyan)
 
-          Example Usage: docface -d ~/git/chef
+          Example Usage: docface -d ~/git/chef -o ~/my_build
           For help use: docface --help
         EOS
         opt :dir, "The directories to scan for markdown files", :short => "d", :type => :string, :required => true
@@ -36,7 +35,6 @@ module DocFace
         opt :title, "The title of the page", :short => "t", :type => :string
         opt :description, "A custom description for the page", :short => "D", :type => :string
       end
-      opts
     end
 
   end

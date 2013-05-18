@@ -19,7 +19,7 @@ module DocFace
     end
 
     def assets(source,dest)
-      FileUtils.cp_r(source,dest,:remove_destination=>true)
+      FileUtils.cp_r("#{source}/.", dest, :remove_destination => true)
     end
 
   end
