@@ -21,6 +21,7 @@ module DocFace
     def cli
       @cli = Cli.opts
       @directory = @cli[:dir]
+      @title = @cli[:title] || "DocFace"
       @output_dir = @cli[:output] ? @cli[:output] : "#{Dir.pwd}/docface"
     end
 

@@ -2,17 +2,17 @@
 $str = ""
 $i = 0
 
-def CreateNav(h,path="")
+def create_nav(h,path="")
   return if h == nil
   h.each do |k,v|
     if k.end_with?("md")
       html_path=k.gsub(/md/, 'html')
-      $str += "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{html_path}\">#{k}</a></li></ul>"
+      $str << "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{html_path}\">#{k}</a></li></ul>"
       $i += 1
     else
       $i += 1
       ## Accordion Header
-      $str += "<div class='accordion-group'>
+      $str << "<div class='accordion-group'>
                 <div class='accordion-heading'>
                   <a class='accordion-toggle' data-toggle='collapse' href='#collapse#{$i}'>
                     #{k}
@@ -22,10 +22,10 @@ def CreateNav(h,path="")
                     <div class='accordion-inner'>
               "
 
-      CreateNav(v, "#{path}/#{k}") if v != nil && v.is_a?(Hash)
+      create_nav(v, "#{path}/#{k}") if v != nil && v.is_a?(Hash)
 
       ## End Accordion Header
-      $str += "</div></div></div>"
+      $str << "</div></div></div>"
     end
   end
 end
@@ -39,7 +39,7 @@ end
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">DocFace</a>
+      <a class="brand" href="#"><%= @title %></a>
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
@@ -66,8 +66,8 @@ end
               <div id='collapse<%=$i%>' class='accordion-body collapse'>
                     <div class='accordion-inner'>
                       <% $i += 1
-                         $str = ""
-                         CreateNav(v,k)
+                         $tr = ""
+                         create_nav(v,k)
                       %>
                       <%= $str%>
                     </div>

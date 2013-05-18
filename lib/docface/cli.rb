@@ -34,6 +34,7 @@ module DocFace
         opt :dir, "The directories to scan for markdown files", :short => "d", :type => :string, :required => true
         opt :output, "The directory to write the generated output to", :short => "o", :type => :string
         opt :title, "The title of the page", :short => "t", :type => :string
+        opt :description, "A custom description for the page", :short => "D", :type => :string
       end
       opts
     end
