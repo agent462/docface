@@ -23,6 +23,18 @@ docface -d ~/git/chef
 docface -d ~/git/chef -o ~/my_docs
 ~~~~
 
+Table of Contents
+-----------------
+Want a table of contents on your pages?  Include the following snippet in your markdown file wherever you want the TOC.
+~~~~
+* This will be replaced with the ToC
+{:toc}
+~~~~
+
+Contributions
+-------------
+Provide a pull request.  We're inheriting most styling from twitter bootstrap.  Visual/Design help appreciated.
+
 License and Author
 ==================
 
