@@ -5,12 +5,12 @@ Gem::Specification.new do |s|
   s.version     = DocFace::VERSION
   s.platform    = Gem::Platform::RUBY
   s.summary     = "A markdown documentation generator/viewer."
-  s.description = "View your markdown files as a structured website."
+  s.description = "A markdown documentation generator/viewer. View your markdown files as a structured website."
   s.authors     = ["Bryan Brandau"]
   s.email       = 'agent462@gmail.com'
   s.has_rdoc    = false
 
-  s.homepage    ='http://github.com/agent462/DocFace'
+  s.homepage    ='http://github.com/agent462/docface'
   s.add_dependency('rainbow', '1.1.4')
   s.add_dependency('trollop', '2.0')
   s.add_dependency('kramdown', '1.0.1')
