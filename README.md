@@ -19,13 +19,23 @@ gem build docface.gemspec
 Usage
 -----------------------
 ~~~~
-docface -d ~/git/chef
 docface -d ~/git/chef -o ~/my_docs
 ~~~~
+
+* For multiple directories include them seperated by a space
+
+~~~~
+docface -d ~/git/chef/cookbooks ~/git/chef/site-cookbooks 
+~~~~
+
+Known Issues
+------------
+* Running locally and using Chrome?  You're going to have a "same origin policy" issue.  You can either put a webserver in front of it, use FireFox or try running Chrome with "--allow-file-access-from-files".  Chrome prevents ajax calls to local files.
 
 Table of Contents
 -----------------
 Want a table of contents on your pages?  Include the following snippet in your markdown file wherever you want the TOC.
+
 ~~~~
 * This will be replaced with the ToC
 {:toc}
