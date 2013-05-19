@@ -45,7 +45,7 @@ module DocFace
     end
 
     def build(file,content)
-      file = File.join(@output_dir,file).gsub(/\.md|.MD|.markdown/,".html")
+      file = File.join(@output_dir,file).gsub(/\.md|.MD|.markdown|.mdown/,".html")
       directory = File.dirname(file)
       @writer.write(directory,file,content)
     end

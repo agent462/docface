@@ -5,7 +5,7 @@ module DocFace
       if File.directory?(dir)
         index = Array.new
         path = dir.gsub(/\\(?=\S)/, '/')
-        Dir.glob(File.join(path, '**/*.{md,MD,markdown}')).each do |file|
+        Dir.glob(File.join(path, '**/*.{md,MD,markdown,mdown}')).each do |file|
           index << file
         end
         index

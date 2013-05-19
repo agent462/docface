@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Bryan Brandau"]
   s.email       = 'agent462@gmail.com'
   s.has_rdoc    = false
+  s.licenses    = ['APACHE']
 
   s.homepage    ='http://github.com/agent462/docface'
   s.add_dependency('rainbow', '1.1.4')
