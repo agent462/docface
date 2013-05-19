@@ -6,8 +6,8 @@ def create_nav(h,path="")
   return if h == nil
   h.each do |k,v|
     @i += 1
-    if k.end_with?("md")
-      html_path = k.gsub(/md/, 'html')
+    if k.end_with?("md") || k.end_with?("MD") || k.end_with?("markdown")
+      html_path = k.gsub(/md|MD|markdown/, 'html')
       @str << "<ul class='nav nav-list'><li><a href=\"#\" res=\"#{path}/#{html_path}\">#{k}</a></li></ul>"
     else
       ## Accordion Header
