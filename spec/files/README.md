@@ -19,8 +19,13 @@ gem build docface.gemspec
 Usage
 -----------------------
 ~~~~
-docface -d ~/git/chef
 docface -d ~/git/chef -o ~/my_docs
+~~~~
+
+* For multiple directories include them seperated by a space
+
+~~~~
+docface -d ~/git/chef/cookbooks ~/git/chef/site-cookbooks 
 ~~~~
 
 Table of Contents

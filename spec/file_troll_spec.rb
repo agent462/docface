@@ -20,6 +20,6 @@ describe 'DocFace::FileTroll' do
   it 'should return index hash' do
     list = @troll.troll(File.join(File.dirname(__FILE__),'./files'))
     response = @troll.index_hash(list)
-    response.should == {""=>{"Users"=>{"bryan"=>{"git"=>{"DocFace"=>{"spec"=>{"."=>{"files"=>{"CHANGELOG.md"=>{}, "README.md"=>{}}}}}}}}}}
+    response.should == {""=>{"Users"=>{"bryan"=>{"git"=>{"DocFace"=>{"spec"=>{"."=>{"files"=>{"CHANGELOG.md"=>{}, "README.md"=>{}}}}}}}}}} #This needs to change so it doesn't fail on a different machine
   end
 end

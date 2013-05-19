@@ -11,8 +11,17 @@ module DocFace
       cli
       @troll = FileTroll.new
       @writer = Writer.new
-      @files = @troll.troll(@directory)
-      parse
+      @parser = Parser.new
+      @short_files = Array.new
+      all_the_things
+    end
+
+    def all_the_things
+      @directory.each do |dir|
+        files = @troll.troll(dir)
+        parse(files,dir)
+      end
+      @index_hash = @troll.index_hash(@short_files)
       cleanup(@index_hash)
       assets
       write_index(build_index("templates/index.erb"))
@@ -25,17 +34,14 @@ module DocFace
       @output_dir = @cli[:output] ? @cli[:output] : "#{Dir.pwd}/docface"
     end
 
-    def parse
-      short_files = Array.new
-      parser = Parser.new
-      @files.each do |file|
-        content = parser.to_html(File.read(file))
-        dir = @directory.gsub(@directory.split('/').last, "")
+    def parse(files,directory)
+      files.each do |file|
+        content = @parser.to_html(File.read(file))
+        dir = directory.gsub(directory.split('/').last, "")
         file = file.gsub(dir, "")
-        short_files << file
+        @short_files << file
         build(file,content)
       end
-      @index_hash = @troll.index_hash(short_files)
     end
 
     def build(file,content)
