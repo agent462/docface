@@ -18,3 +18,8 @@ p {
     line-height:1.5em;
     margin: 1em 0 1.5em;
 }
+
+.accordion .accordion-toggle {
+  display: block;
+  padding: 8px 8px;
+}
