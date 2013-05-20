@@ -6,7 +6,7 @@ h2 {
     font-size: 1.5em;
     padding-top: 1.2em;
     margin: 1em 0 1em;
-    border-top: 1px solid #ddd;
+    border-top: 2px solid #ddd;
 }
 
 h3 {
@@ -20,6 +20,13 @@ p {
 }
 
 .accordion .accordion-toggle {
-  display: block;
   padding: 8px 8px;
+}
+
+pre {
+  background-color: rgb(0, 0, 0);
+  color: rgb(248, 248, 248);
+  font-family: monospace;
+  font-size: 14px;
+  width: 800px;
 }
