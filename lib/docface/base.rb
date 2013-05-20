@@ -30,7 +30,10 @@ module DocFace
     def cli
       @cli = Cli.opts
       @directory = @cli[:dir]
-      @title = @cli[:title] || "DocFace"
+      @page_attributes = {
+        :title => @cli[:title] || "DocFace",
+        :summary => @cli[:summary] || ""
+      }
       @output_dir = @cli[:output] ? @cli[:output] : "#{Dir.pwd}/docface"
     end
 

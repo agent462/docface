@@ -1,13 +1,14 @@
 DocFace
 =========
-DocFace turns your markdown files into html and makes them easy to view via a web page.
+DocFace turns your markdown files into html and makes them easy to view via a web page.  It will recursively look through the directories you specify and will build navigation in the directory heirarchy that it discovered the files in.
 
 I mainly created DocFace because I use Opscode Chef and you end up with tons of README and CHANGELOG files.  I wanted to view these is some sane way.
 
 <img src="https://raw.github.com/agent462/docface/downloads/screenshot.png" title="docface screenshot" />
 Installation
 -----------------------
-~~~~
+
+~~~~ ruby
 gem install docface
 ~~~~
 
