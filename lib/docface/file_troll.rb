@@ -26,5 +26,11 @@ module DocFace
       tree
     end
 
+    def cleanup(h)
+      return true if h.empty?
+      h.find_all{|k,v|h[k]=nil if v.is_a?(Hash)&&cleanup(v)}
+      false
+    end
+
   end
 end

@@ -1,8 +1,9 @@
 require 'docface/file_troll'
 require 'docface/parser'
 require 'docface/writer'
-require 'erb'
 require 'docface/cli'
+require 'erb'
+require 'rainbow'
 
 module DocFace
   class Base
@@ -17,15 +18,17 @@ module DocFace
     end
 
     def all_the_things
+      time = Time.now
       @directory.each do |dir|
         files = @troll.troll(dir)
         parse(files,dir)
       end
       @index_hash = @troll.index_hash(@short_files)
-      cleanup(@index_hash)
+      @troll.cleanup(@index_hash)
       assets
       write_index(build_index("templates/index.erb"))
-      puts "Your build was created at #{@output_dir}"
+      time_taken = Time.now - time
+      puts "Your build was created at #{@output_dir}.\n\r#{@short_files.count} documents were parsed in #{time_taken} seconds.".color(:cyan)
     end
 
     def cli
@@ -41,12 +44,15 @@ module DocFace
     def parse(files,directory)
       files.each do |file|
         content = @parser.to_html(File.read(file))
-        dir = directory.gsub(/\/*$/,'').gsub(directory.split('/').last, "")
-        file = file.gsub(dir, "")
-        @short_files << file
-        puts file if @cli[:verbose]
+        @short_files << strip_path(file,directory)
+        puts file.color(:yellow) if @cli[:verbose]
         build(file,content)
       end
+    end
+
+    def strip_path(file,directory)
+      dir = directory.gsub(/\/*$/,'').gsub(directory.split('/').last, "")
+      file = file.gsub(dir, "")
     end
 
     def build(file,content)
@@ -66,12 +72,6 @@ module DocFace
 
     def write_index(content)
       @writer.write(@output_dir,"#{@output_dir}/index.html",content)
-    end
-
-    def cleanup(h)
-      return true if h.empty?
-      h.find_all{|k,v|h[k]=nil if v.is_a?(Hash)&&cleanup(v)}
-      false
     end
 
   end
