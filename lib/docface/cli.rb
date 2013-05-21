@@ -35,6 +35,7 @@ module DocFace
         opt :title, "The title of the page", :short => "t", :type => :string
         opt :summary, "A custom summary for the page", :short => "s", :type => :string
         opt :wide, "Pass this parameter if you need a wider nav", :short => "w"
+        opt :verbose, "Verbose CLI output", :short => "v"
       end
 
       opts = Trollop::with_standard_exception_handling p do

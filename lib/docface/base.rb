@@ -25,6 +25,7 @@ module DocFace
       cleanup(@index_hash)
       assets
       write_index(build_index("templates/index.erb"))
+      puts "Your build was created at #{@output_dir}"
     end
 
     def cli
@@ -40,9 +41,10 @@ module DocFace
     def parse(files,directory)
       files.each do |file|
         content = @parser.to_html(File.read(file))
-        dir = directory.gsub(directory.split('/').last, "")
+        dir = directory.gsub(/\/*$/,'').gsub(directory.split('/').last, "")
         file = file.gsub(dir, "")
         @short_files << file
+        puts file if @cli[:verbose]
         build(file,content)
       end
     end
