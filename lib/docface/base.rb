@@ -52,7 +52,7 @@ module DocFace
 
     def strip_path(file,directory)
       dir = directory.gsub(/\/*$/,'').gsub(directory.split('/').last, "")
-      file = file.gsub(dir, "")
+      file = file.gsub!(dir, "")
     end
 
     def build(file,content)
