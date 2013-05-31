@@ -4,7 +4,7 @@
 
 def create_nav(h,path="")
   return if h == nil
-  h.each do |k,v|
+  h.sort.each do |k,v|
     @i += 1
     if k.end_with?(".md") || k.end_with?(".MD") || k.end_with?(".markdown") || k.end_with?(".mdown")
       html_path = k.gsub(/.md|.MD|.markdown|.mdown/, '.html')
@@ -52,7 +52,7 @@ end
     <div class="span<%= @cli[:wide] ? "3" : "2"%>">
       <div class="sidebar-nav">
         <div class='accordion'>
-          <% @index_hash.each do |k,v| %>
+          <% @index_hash.sort.each do |k,v| %>
             <div class='accordion-group'>
               <div class='accordion-heading'>
                 <a class='accordion-toggle' data-toggle='collapse' href='#collapse<%= @i %>'>
