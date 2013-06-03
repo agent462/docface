@@ -42,6 +42,17 @@ Want a table of contents on your pages?  Include the following snippet in your m
 {:toc}
 ~~~~
 
+Code Highlighting
+-----------------
+Docface uses [coderay](http://coderay.rubychan.de/) for syntax highlighting.  To get the syntax highlighting specify the language after the markdown code block.
+~~~~
+    ~~~~ ruby
+    h.each do |h|
+      puts h
+    end
+    ~~~~
+~~~~
+
 Contributions
 -------------
 Provide a pull request.  We're inheriting most styling from twitter bootstrap.  Visual/Design help appreciated.
